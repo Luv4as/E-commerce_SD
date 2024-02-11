@@ -28,6 +28,10 @@ class Produto(models.Model):
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, default=1)
     descricao = models.CharField(max_length=250, default='', blank=True, null=True)
     #imagem = models.ImageField(upload_to='uploads/produto/')
+    #COISAS DE SALDÃO
+    e_saldo = models.BooleanField(default = False)
+    preco_saldo = models.DecimalField(default = 0, decimal_places = 2, max_digits = 6)
+    
 
     def __str__(self): 
         return self.nome
