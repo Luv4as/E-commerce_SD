@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect
 from .models import Produto
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+from .forms import SignUpForm
+from django import forms
 
 def home(request):
     produtos = Produto.objects.all()
@@ -30,3 +34,23 @@ def logout_user(request):
     logout(request)
     messages.success(request, ('Você deslogou da sua conta'))
     return redirect('home')
+
+def cadastro_user(request):
+    form = SignUpForm()
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+
+            #LOGANDO USUÁRIO
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            messages.success(request, ('Você criou sua conta com sucesso!'))
+            return redirect('home')
+        else:
+            messages.success(request, ('Houve um erro no cadastro, verifique suas informações e tente novamente.'))
+            return redirect('cadastro')
+    else:
+        return render(request, 'cadastro.html', {'form':form})
