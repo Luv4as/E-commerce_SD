@@ -21,13 +21,37 @@
 
                         {% else %}
                             <a>R${{ produto.preco }}</a>
+                            <br/>
                         {% endif %}
+                        {{produto.id}}
+                        <button type="button" value="{{ produto.id }}" class="btn btn-primary" id="add-cart">Adicionar ao carrinho</button>
                     </center>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
+
+<script>
+    // Checar se o botão foi apertado
+    $(document).on('click', '#add-cart', function(e){
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url:'{% url "cart_add" %}',
+            data: {
+                produto_id: $('#add-cart').val(),
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                action: 'post'
+            },
+            success: function(json){
+                console.log(json)
+            },
+
+            error: function(xhr, errmsg, err){
+            }
+        });
+    })
+</script>
 
 {% endblock %} 
