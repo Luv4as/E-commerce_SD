@@ -1,3 +1,5 @@
+from loja.models import Produto 
+
 class Cart():
     def __init__(self, request):
         self.session = request.session
@@ -13,8 +15,8 @@ class Cart():
         self.cart = cart
 
     def add(self, produto):
-        produto_id: str(produto.id)
-
+        produto_id: str(produto.id)  # type: ignore
+        
         if produto_id in self.cart:
             pass
         else:

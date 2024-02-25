@@ -9,6 +9,7 @@ def cart_summary(request):
 def cart_add(request):
     # Pegar o carrinho
     cart = Cart(request)
+    
     # Testar o POST
     if request.POST.get('action') == 'post':
         # Pegar as coisas

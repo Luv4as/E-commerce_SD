@@ -7,7 +7,7 @@
     <div class="card mb-3" >
         <div class="row g-0">
             <div class="col-md-4">
-                <img src="..." class="img-fluid rounded-start" alt="...">
+                <!-- <img src="..." class="img-fluid rounded-start" alt="..."> -->
             </div>
             <div class="col-md-8">
                 <div class="card-body">
@@ -22,8 +22,8 @@
                         {% else %}
                             <a>R${{ produto.preco }}</a>
                             <br/>
+                            {{produto.id}}
                         {% endif %}
-                        {{produto.id}}
                         <button type="button" value="{{ produto.id }}" class="btn btn-primary" id="add-cart">Adicionar ao carrinho</button>
                     </center>
                 </div>
@@ -35,6 +35,7 @@
 <script>
     // Checar se o botão foi apertado
     $(document).on('click', '#add-cart', function(e){
+        console.log(produto_id)
         e.preventDefault();
         $.ajax({
             type: 'POST',
