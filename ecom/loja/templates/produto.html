@@ -22,8 +22,9 @@
                         {% else %}
                             <a>R${{ produto.preco }}</a>
                             <br/>
+                            <a>ID: {{produto.id}}</a>
+                            <br/>
                         {% endif %}
-                        {{produto.id}}
                         <button type="button" value="{{ produto.id }}" class="btn btn-primary" id="add-cart">Adicionar ao carrinho</button>
                     </center>
                 </div>

@@ -13,11 +13,11 @@ class Cart():
         self.cart = cart
 
     def add(self, produto):
-        produto_id: str(produto.id)
+        produto_id = str(produto.id) # type: ignore
 
         if produto_id in self.cart:
             pass
         else:
-            self.cart[produto_id] = {'price': str(produto.preco)}
+            self.cart[produto_id] = {'preco': str(produto.preco)}
 
         self.session.modified = True
