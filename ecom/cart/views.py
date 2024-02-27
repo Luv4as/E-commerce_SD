@@ -4,7 +4,11 @@ from loja.models import Produto
 from django.http import JsonResponse
 
 def cart_summary(request):
-    return render(request, 'cart/cart_summary.html', {})
+    # Pega o carrinho
+    cart = Cart(request)
+    cart_products = cart.get_prods
+
+    return render(request, 'cart/cart_summary.html', {"cart_products": cart_products})
 
 def cart_add(request):
     # Pegar o carrinho
@@ -19,9 +23,15 @@ def cart_add(request):
 
         # Salvar na sessão
         cart.add(produto=produto)
+        
+        # Qunatidade do carrinho
+        cart_quantity = cart.__len__()
 
         # Retornar resposta
-        response = JsonResponse({'Product name: ': produto.nome})
+        # response = JsonResponse({'Product name: ': produto.nome})
+        response = JsonResponse({'qty: ': cart_quantity})
+
+
         return response
 
 def cart_delete(request):

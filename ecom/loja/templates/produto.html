@@ -22,8 +22,6 @@
                         {% else %}
                             <a>R${{ produto.preco }}</a>
                             <br/>
-                            <a>ID: {{produto.id}}</a>
-                            <br/>
                         {% endif %}
                         <button type="button" value="{{ produto.id }}" class="btn btn-primary" id="add-cart">Adicionar ao carrinho</button>
                     </center>
@@ -46,7 +44,8 @@
                 action: 'post'
             },
             success: function(json){
-                console.log(json)
+                // console.log(json)
+                document.getElementById('cart_quantity').textContent = json.qty
             },
 
             error: function(xhr, errmsg, err){

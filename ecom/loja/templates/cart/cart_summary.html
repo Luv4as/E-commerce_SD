@@ -11,6 +11,39 @@
             </div>
         </header>
         <br/>
+        <div class="container">
+            {% if cart_products %}
+                {% for produto in cart_products %}
+                <div class="card mb-3" >
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="..." class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <center>
+                                    <h5 class="card-title">{{ produto.nome }}</h5>
+                                    <p class="card-text">{{ produto.descricao }}</p>
+                                    {% if produto.e_saldo %}
+                                        <strike>R${{ produto.preco }}</strike>
+                                        <br/>
+                                        <a>R${{ produto.preco_saldo }}</a>
+            
+                                    {% else %}
+                                        <a>R${{ produto.preco }}</a>
+                                        <br/>
+                                    {% endif %}
+                                    <button type="button" value="{{ produto.id }}" class="btn btn-primary" id="add-cart">Adicionar ao carrinho</button>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <a class="">Carrinho Vazio</a>
+            {% endif %}
+        </div>
         <br/>
         <br/>
 {% endblock %}       

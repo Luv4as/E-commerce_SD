@@ -1,3 +1,6 @@
+from loja.models import Produto
+
+
 class Cart():
     def __init__(self, request):
         self.session = request.session
@@ -21,3 +24,14 @@ class Cart():
             self.cart[produto_id] = {'preco': str(produto.preco)}
 
         self.session.modified = True
+
+    def __len__(self):
+        return len(self.cart)
+    
+    def get_prods(self):
+        # Pega ids do carrinho
+        product_ids = self.cart.keys()
+
+        # Usa ids para procurar produtos
+        produtos = Produto.objects.filter(id__in=product_ids)
+        return produtos
