@@ -31,13 +31,24 @@ def cart_add(request):
 
         # Retornar resposta
         # response = JsonResponse({'Product name: ': produto.nome})
-        response = JsonResponse({'qty: ': cart_quantity})
+        response = JsonResponse({'qty: ':cart_quantity})
 
 
         return response
 
 def cart_delete(request):
-    pass
+    cart = Cart(request)
+    if request.POST.get('action') =='post':
+        # Pegar as coisas
+        produto_id = int(request.POST.get('produto_id'))
+        # Chamar a função de deletar
+        cart.delete(produto=produto_id)
+
+        # Retornar resposta
+        
+        response = JsonResponse({'produto':produto_id})
+        return response
+
 
 def cart_update(request):
     pass

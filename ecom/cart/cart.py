@@ -41,3 +41,11 @@ class Cart():
     def get_qty(self):
         quantities = self.cart
         return quantities
+    
+    def delete(self, produto):
+        produto_id = str(produto)
+        # Deletar do dicionario/carrinho
+        if produto_id in self.cart:
+            del self.cart[produto_id]
+
+        self.session.modified = True
