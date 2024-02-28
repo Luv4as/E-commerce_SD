@@ -1,0 +1,45 @@
+import { useState } from 'react'
+
+function Login() {
+    return (
+        <>
+            <header class="bg-dark py-5">
+                <div class="container px-4 px-lg-5 my-5">
+                    <div class="text-center text-white">
+                        <h1 class="display-4 fw-bolder">Login</h1>
+                        <p class="lead fw-normal text-white-50 mb-0">Entre na sua conta</p>
+                    </div>
+                </div>
+            </header>
+
+            <div class="container">
+                <div class="row">
+                    <center>
+                        <div class="col-8">
+                            <br />
+                            <br />
+
+                            <form method="POST" action="{% url 'enter' %}">
+                                {/* {% csrf_token %} */}
+                                <div class="mb-3">
+                                    <h4>Nome de usuário</h4>
+                                    <input type="text" class="form-control" name="username" placeholder="Nome de usuário"/>
+                                </div>
+                                <div class="mb-3">
+                                    <h4>Senha</h4>
+                                    <input type="password" class="form-control" name="password" placeholder="**********"/>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Login</button>
+                            </form>
+
+                            <br />
+                            <br />
+                        </div>
+                    </center>
+                </div>
+            </div>
+        </>
+    )
+}
+
+export default Login
