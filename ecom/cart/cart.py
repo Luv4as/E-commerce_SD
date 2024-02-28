@@ -15,13 +15,15 @@ class Cart():
         # Ter certeza que o carrinho é disponivel para todas páginas
         self.cart = cart
 
-    def add(self, produto):
+    def add(self, produto, quantity):
         produto_id = str(produto.id) # type: ignore
+        produto_qty = str(quantity)
 
         if produto_id in self.cart:
             pass
         else:
-            self.cart[produto_id] = {'preco': str(produto.preco)}
+            #self.cart[produto_id] = {'preco': str(produto.preco)}
+            self.cart[produto_id] = int(produto_qty)
 
         self.session.modified = True
 
@@ -35,3 +37,7 @@ class Cart():
         # Usa ids para procurar produtos
         produtos = Produto.objects.filter(id__in=product_ids)
         return produtos
+    
+    def get_qty(self):
+        quantities = self.cart
+        return quantities

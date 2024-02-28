@@ -7,8 +7,9 @@ def cart_summary(request):
     # Pega o carrinho
     cart = Cart(request)
     cart_products = cart.get_prods
+    quantities = cart.get_qty
 
-    return render(request, 'cart/cart_summary.html', {"cart_products": cart_products})
+    return render(request, 'cart/cart_summary.html', {"cart_products": cart_products, "quantities":quantities})
 
 def cart_add(request):
     # Pegar o carrinho
@@ -17,12 +18,13 @@ def cart_add(request):
     if request.POST.get('action') == 'post':
         # Pegar as coisas
         produto_id = int(request.POST.get('produto_id'))
+        produto_qty = int(request.POST.get('produto_qty'))
 
         # Procurar o produto no bd
         produto = get_object_or_404(Produto, id=produto_id)
 
         # Salvar na sessão
-        cart.add(produto=produto)
+        cart.add(produto=produto, quantity=produto_qty)
         
         # Qunatidade do carrinho
         cart_quantity = cart.__len__()
