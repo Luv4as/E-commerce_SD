@@ -1,3 +1,6 @@
+from loja.models import Produto
+
+
 class Cart():
     def __init__(self, request):
         self.session = request.session
@@ -12,12 +15,37 @@ class Cart():
         # Ter certeza que o carrinho é disponivel para todas páginas
         self.cart = cart
 
-    def add(self, produto):
-        produto_id: str(produto.id)
+    def add(self, produto, quantity):
+        produto_id = str(produto.id) # type: ignore
+        produto_qty = str(quantity)
 
         if produto_id in self.cart:
             pass
         else:
-            self.cart[produto_id] = {'price': str(produto.preco)}
+            #self.cart[produto_id] = {'preco': str(produto.preco)}
+            self.cart[produto_id] = int(produto_qty)
+
+        self.session.modified = True
+
+    def __len__(self):
+        return len(self.cart)
+    
+    def get_prods(self):
+        # Pega ids do carrinho
+        product_ids = self.cart.keys()
+
+        # Usa ids para procurar produtos
+        produtos = Produto.objects.filter(id__in=product_ids)
+        return produtos
+    
+    def get_qty(self):
+        quantities = self.cart
+        return quantities
+    
+    def delete(self, produto):
+        produto_id = str(produto)
+        # Deletar do dicionario/carrinho
+        if produto_id in self.cart:
+            del self.cart[produto_id]
 
         self.session.modified = True
