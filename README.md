@@ -8,6 +8,9 @@ Esse é um sistema de loja online simples com 3 funcionalidades principais de um
 * Um login e cadastro
 * Página principal com todos produtos e página com produtos por categoria
 
+## Sistema
+<img src="print_sistema.png">
+
 ## Participantes:
 * Lucas Venancio -> lucas.gvenancio2@ufrpe.br
 * João Victor da Silva -> joao.vsilva10@ufrpe.br
